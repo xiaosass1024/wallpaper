@@ -117,7 +117,7 @@
 	import {ref} from "vue";
 	import { getStatusBarHeight } from "../../utils/system";
 	import { onLoad } from "@dcloudio/uni-app";
-	import { apiGetSetupScore } from "../../api/apis";
+	import { apiGetSetupScore, apiWriteDownload } from "../../api/apis";
 	
 	const maskState = ref(true);
 	const infoPopup = ref(null);
@@ -211,7 +211,7 @@
 	}
 	
 	//点击下载
-	const clickDownload = ()=>{
+	const clickDownload = async ()=>{
 		// #ifdef H5
 		uni.showModal({
 			content:"请长按保存壁纸",
@@ -221,17 +221,42 @@
 		
 		
 		// #ifndef H5
-		/* uni.saveImageToPhotosAlbum({
-			filePath:currentInfo.value.picurl,
-			success:(res)=>{
-				console.log(res);
-			}
-		}) */
+		
+		let {classid, _id:wallId} = currentInfo.value;
+		let res = await apiWriteDownload({
+			classid,
+			wallId
+		})
+		console.log(res);
+		return
+		
 		
 		uni.getImageInfo({
 			src:currentInfo.value.picurl,
 			success: (res)=>{
-				console.log(res);
+				uni.saveImageToPhotosAlbum({
+					filePath:res.path,
+					success: (res)=>{
+						console.log(res);
+					},
+					fail:(err)=>{
+						uni.showModal({
+							title:"提示",
+							content:"需要授权保存相册",
+							success: res=>{
+								if(res.confirm){
+									uni.openSetting({
+										success(setting) {
+											console.log(setting);
+											// if(setting.authSetting[''])
+										}
+									})
+								}
+							}
+							
+						})
+					}
+				})
 			}
 		})
 		

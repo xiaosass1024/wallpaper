@@ -32,9 +32,16 @@ function apiGetSetupScore(data = {}) {
     data
   });
 }
+function apiWriteDownload(data = {}) {
+  return utils_request.request({
+    url: "/downloadWall",
+    data
+  });
+}
 exports.aipGetNotice = aipGetNotice;
 exports.apiGetBanner = apiGetBanner;
 exports.apiGetClassList = apiGetClassList;
 exports.apiGetClassify = apiGetClassify;
 exports.apiGetDayRandom = apiGetDayRandom;
 exports.apiGetSetupScore = apiGetSetupScore;
+exports.apiWriteDownload = apiWriteDownload;

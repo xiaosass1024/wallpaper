@@ -97,13 +97,14 @@ const _sfc_main = {
     const goBack = () => {
       common_vendor.index.navigateBack();
     };
-    const clickDownload = () => {
-      common_vendor.index.getImageInfo({
-        src: currentInfo.value.picurl,
-        success: (res) => {
-          console.log(res);
-        }
+    const clickDownload = async () => {
+      let { classid, _id: wallId } = currentInfo.value;
+      let res = await api_apis.apiWriteDownload({
+        classid,
+        wallId
       });
+      console.log(res);
+      return;
     };
     function readImgsFun() {
       readImgs.value.push(
