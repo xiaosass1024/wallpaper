@@ -33,5 +33,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-412fc155"], ["__file", "G:/我的云端硬盘/HBuilderProject/wallpaper-kt/components/custom-nav-bar/custom-nav-bar.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-412fc155"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/components/custom-nav-bar/custom-nav-bar.vue"]]);
 wx.createComponent(Component);

@@ -109,5 +109,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "G:/我的云端硬盘/HBuilderProject/wallpaper-kt/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

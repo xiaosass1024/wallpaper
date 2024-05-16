@@ -72,5 +72,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     a: common_vendor.t($options.dateShow)
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "G:/我的云端硬盘/HBuilderProject/wallpaper-kt/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.vue"]]);
 wx.createComponent(Component);

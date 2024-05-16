@@ -38,5 +38,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-6bcfa975"], ["__file", "G:/我的云端硬盘/HBuilderProject/wallpaper-kt/pages/classify/classify.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-6bcfa975"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/classify/classify.vue"]]);
 wx.createPage(MiniProgramPage);

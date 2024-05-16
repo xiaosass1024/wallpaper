@@ -221,12 +221,20 @@
 		
 		
 		// #ifndef H5
-		uni.saveImageToPhotosAlbum({
+		/* uni.saveImageToPhotosAlbum({
 			filePath:currentInfo.value.picurl,
 			success:(res)=>{
 				console.log(res);
 			}
+		}) */
+		
+		uni.getImageInfo({
+			src:currentInfo.value.picurl,
+			success: (res)=>{
+				console.log(res);
+			}
 		})
+		
 		// #endif
 		
 	}
