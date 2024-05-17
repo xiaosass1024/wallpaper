@@ -98,13 +98,44 @@ const _sfc_main = {
       common_vendor.index.navigateBack();
     };
     const clickDownload = async () => {
-      let { classid, _id: wallId } = currentInfo.value;
-      let res = await api_apis.apiWriteDownload({
-        classid,
-        wallId
-      });
-      console.log(res);
-      return;
+      try {
+        let { classid, _id: wallId } = currentInfo.value;
+        let res = await api_apis.apiWriteDownload({
+          classid,
+          wallId
+        });
+        console.log(res);
+        return;
+        common_vendor.index.getImageInfo({
+          src: currentInfo.value.picurl,
+          success: (res2) => {
+            common_vendor.index.saveImageToPhotosAlbum({
+              filePath: res2.path,
+              success: (res3) => {
+                console.log(res3);
+              },
+              fail: (err) => {
+                common_vendor.index.showModal({
+                  title: "提示",
+                  content: "需要授权保存相册",
+                  success: (res3) => {
+                    if (res3.confirm) {
+                      common_vendor.index.openSetting({
+                        success(setting) {
+                          console.log(setting);
+                        }
+                      });
+                    }
+                  }
+                });
+              }
+            });
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        common_vendor.index.hideLoading();
+      }
     };
     function readImgsFun() {
       readImgs.value.push(

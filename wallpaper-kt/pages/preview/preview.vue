@@ -222,6 +222,8 @@
 		
 		// #ifndef H5
 		
+		try{
+		
 		let {classid, _id:wallId} = currentInfo.value;
 		let res = await apiWriteDownload({
 			classid,
@@ -259,7 +261,10 @@
 				})
 			}
 		})
-		
+		}catch(err){
+			console.log(err)
+			uni.hideLoading()
+		}
 		// #endif
 		
 	}

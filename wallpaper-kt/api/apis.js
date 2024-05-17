@@ -65,3 +65,18 @@ export function apiWriteDownload(data={}){
 		data
 		})
 }
+
+
+export function apiUserInfo(data={}){
+	return request({
+		url:"/userInfo",
+		data
+		})
+}
+
+export function apiGetHistoryList(data={}){
+	return request({
+		url:"/userWallList",
+		data
+		})
+}

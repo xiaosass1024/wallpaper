@@ -38,10 +38,24 @@ function apiWriteDownload(data = {}) {
     data
   });
 }
+function apiUserInfo(data = {}) {
+  return utils_request.request({
+    url: "/userInfo",
+    data
+  });
+}
+function apiGetHistoryList(data = {}) {
+  return utils_request.request({
+    url: "/userWallList",
+    data
+  });
+}
 exports.aipGetNotice = aipGetNotice;
 exports.apiGetBanner = apiGetBanner;
 exports.apiGetClassList = apiGetClassList;
 exports.apiGetClassify = apiGetClassify;
 exports.apiGetDayRandom = apiGetDayRandom;
+exports.apiGetHistoryList = apiGetHistoryList;
 exports.apiGetSetupScore = apiGetSetupScore;
+exports.apiUserInfo = apiUserInfo;
 exports.apiWriteDownload = apiWriteDownload;

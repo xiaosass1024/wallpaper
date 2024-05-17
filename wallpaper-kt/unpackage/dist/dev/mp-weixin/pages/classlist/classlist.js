@@ -19,8 +19,11 @@ const _sfc_main = {
     };
     const noData = common_vendor.ref(false);
     common_vendor.onLoad((e) => {
-      let { id = null, name = null } = e;
-      queryParams.classid = id;
+      let { id = null, name = null, type = null } = e;
+      if (type)
+        queryParams.type = type;
+      if (id)
+        queryParams.classid = id;
       common_vendor.index.setNavigationBarTitle({
         title: name
       });
@@ -35,7 +38,11 @@ const _sfc_main = {
       }
     );
     const getClassList = async () => {
-      let res = await api_apis.apiGetClassList(queryParams);
+      let res;
+      if (queryParams.classid)
+        res = await api_apis.apiGetClassList(queryParams);
+      if (queryParams.type)
+        res = await api_apis.apiGetHistoryList(queryParams);
       classList.value = [...classList.value, ...res.data];
       if (res.data.length < queryParams.pageSize) {
         noData.value = true;

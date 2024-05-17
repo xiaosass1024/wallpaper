@@ -18,7 +18,7 @@
 <script setup>
 import { ref } from 'vue';
 import {onLoad, onReachBottom} from "@dcloudio/uni-app"
-import { apiGetClassList } from '../../api/apis';
+import { apiGetClassList, apiGetHistoryList } from '../../api/apis';
 const classList = ref([])
 const queryParams = {
 	pageNum:1,
@@ -27,8 +27,10 @@ const queryParams = {
 const noData = ref(false)
 onLoad((e)=>{
 	// console.log(e);
-	let {id=null,name=null} = e;
-	queryParams.classid = id;
+	let {id=null,name=null,type=null} = e;
+	if(type) queryParams.type = type;
+	if(id) queryParams.classid = id;
+	
 	// console.log(id, name);
 	uni.setNavigationBarTitle({
 		title:name
@@ -45,7 +47,10 @@ onReachBottom(()=>{
 
 
 const getClassList = async ()=>{
-	let res = await apiGetClassList(queryParams);
+	let res;
+	if(queryParams.classid) res = await apiGetClassList(queryParams);
+	if(queryParams.type) res = await apiGetHistoryList(queryParams);
+		
 	classList.value = [...classList.value , ...res.data];
 	
 	if(res.data.length < queryParams.pageSize){
