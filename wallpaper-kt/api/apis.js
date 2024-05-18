@@ -88,3 +88,10 @@ export function apiGetNoticeInfo(data={}){
 		data
 		})
 }
+
+export function apiSearchData(data={}){
+	return request({
+		url:"/searchWall",
+		data
+		})
+}

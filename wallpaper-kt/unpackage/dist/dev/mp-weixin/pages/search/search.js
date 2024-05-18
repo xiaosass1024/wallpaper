@@ -1,16 +1,19 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const api_apis = require("../../api/apis.js");
 if (!Array) {
-  const _component_uni_search_bar = common_vendor.resolveComponent("uni-search-bar");
+  const _easycom_uni_search_bar2 = common_vendor.resolveComponent("uni-search-bar");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  const _component_uv_empty = common_vendor.resolveComponent("uv-empty");
+  const _easycom_uv_empty2 = common_vendor.resolveComponent("uv-empty");
   const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
-  (_component_uni_search_bar + _easycom_uni_icons2 + _component_uv_empty + _easycom_uni_load_more2)();
+  (_easycom_uni_search_bar2 + _easycom_uni_icons2 + _easycom_uv_empty2 + _easycom_uni_load_more2)();
 }
+const _easycom_uni_search_bar = () => "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.js";
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uv_empty = () => "../../uni_modules/uv-empty/components/uv-empty/uv-empty.js";
 const _easycom_uni_load_more = () => "../../uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_uni_load_more)();
+  (_easycom_uni_search_bar + _easycom_uni_icons + _easycom_uv_empty + _easycom_uni_load_more)();
 }
 const _sfc_main = {
   __name: "search",
@@ -20,30 +23,47 @@ const _sfc_main = {
       pageSize: 12,
       keyword: ""
     });
-    const historySearch = common_vendor.ref(["搜索词1", "搜索词2", "搜索词3", "搜索词4"]);
+    const historySearch = common_vendor.ref(common_vendor.index.getStorageSync("historySearch") || []);
     const recommendList = common_vendor.ref(["美女", "帅哥", "宠物", "卡通"]);
     const noData = common_vendor.ref(false);
-    common_vendor.ref(false);
+    const noSearch = common_vendor.ref(false);
     const classList = common_vendor.ref([
       { _id: 123123, smallPicurl: "https://mp-0cb878b7-99ec-44ea-8246-12b123304b05.cdn.bspapp.com/xxmBizhi/20231102/1698905562410_0_small.webp" }
     ]);
     const onSearch = () => {
+      historySearch.value = [.../* @__PURE__ */ new Set([queryParams.value.keyword, ...historySearch.value])];
+      common_vendor.index.setStorageSync("historySearch", historySearch.value);
+      searchData();
+      console.log(queryParams.value.keyword);
     };
     const onClear = () => {
     };
     const clickTab = (value) => {
+      queryParams.value.keyword = value;
+      searchData();
     };
     const removeHistory = () => {
       common_vendor.index.showModal({
         title: "是否清空历史搜索？",
         success: (res) => {
           if (res.confirm) {
-            console.log("确认删除");
+            common_vendor.index.removeStorageSync("historySearch");
+            historySearch.value = [];
           }
         }
       });
     };
+    const searchData = async () => {
+      let res = await api_apis.apiSearchData(queryParams.value);
+      classList.value = [...classList.value, ...res.data];
+      if (queryParams.value.pageSize > res.data.length)
+        noData.value = true;
+      if (res.data.length == 0 && classList.value == 0)
+        noSearch.value = true;
+      console.log(res);
+    };
     common_vendor.onReachBottom(() => {
+      queryParams.value.pageNum++;
     });
     common_vendor.onUnload(() => {
     });
@@ -67,33 +87,36 @@ const _sfc_main = {
           return {
             a: common_vendor.t(tab),
             b: tab,
-            c: common_vendor.o(($event) => clickTab(), tab)
+            c: common_vendor.o(($event) => clickTab(tab), tab)
           };
         }),
         i: common_vendor.f(recommendList.value, (tab, k0, i0) => {
           return {
             a: common_vendor.t(tab),
             b: tab,
-            c: common_vendor.o(($event) => clickTab(), tab)
+            c: common_vendor.o(($event) => clickTab(tab), tab)
           };
         }),
-        j: common_vendor.p({
+        j: noSearch.value
+      }, noSearch.value ? {
+        k: common_vendor.p({
           mode: "search",
           icon: "http://cdn.uviewui.com/uview/empty/search.png"
-        }),
-        k: common_vendor.f(classList.value, (item, k0, i0) => {
+        })
+      } : common_vendor.e({
+        l: common_vendor.f(classList.value, (item, k0, i0) => {
           return {
             a: item.smallPicurl,
             b: item._id
           };
         }),
-        l: `/pages/preview/preview`,
-        m: noData.value || classList.value.length
+        m: `/pages/preview/preview`,
+        n: noData.value || classList.value.length
       }, noData.value || classList.value.length ? {
-        n: common_vendor.p({
+        o: common_vendor.p({
           status: noData.value ? "noMore" : "loading"
         })
-      } : {});
+      } : {}));
     };
   }
 };

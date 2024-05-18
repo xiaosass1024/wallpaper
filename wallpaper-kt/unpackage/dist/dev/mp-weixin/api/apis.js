@@ -56,6 +56,12 @@ function apiGetNoticeInfo(data = {}) {
     data
   });
 }
+function apiSearchData(data = {}) {
+  return utils_request.request({
+    url: "/searchWall",
+    data
+  });
+}
 exports.aipGetNotice = aipGetNotice;
 exports.apiGetBanner = apiGetBanner;
 exports.apiGetClassList = apiGetClassList;
@@ -64,5 +70,6 @@ exports.apiGetDayRandom = apiGetDayRandom;
 exports.apiGetHistoryList = apiGetHistoryList;
 exports.apiGetNoticeInfo = apiGetNoticeInfo;
 exports.apiGetSetupScore = apiGetSetupScore;
+exports.apiSearchData = apiSearchData;
 exports.apiUserInfo = apiUserInfo;
 exports.apiWriteDownload = apiWriteDownload;

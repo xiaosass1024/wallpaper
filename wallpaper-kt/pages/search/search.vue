@@ -36,12 +36,12 @@
 		</view>
 		
 		
-		<view class="noSearch">
+		<view class="noSearch" v-if="noSearch">
 			<uv-empty mode="search" icon="http://cdn.uviewui.com/uview/empty/search.png"></uv-empty>
 		</view>
 		
 		
-		<view>
+		<view v-else>
 			<view class="list">
 				<navigator :url="`/pages/preview/preview`"  class="item" 
 				v-for="item in classList" :key="item._id">				
@@ -58,6 +58,8 @@
 <script setup>
 import {ref} from "vue";
 import {onLoad,onUnload,onReachBottom} from "@dcloudio/uni-app";
+import { apiSearchData } from "../../api/apis";
+
 
 //查询参数
 const queryParams = ref({	
@@ -67,7 +69,7 @@ const queryParams = ref({
 })
 
 //搜索历史词
-const historySearch = ref(['搜索词1','搜索词2','搜索词3','搜索词4']);
+const historySearch = ref(uni.getStorageSync("historySearch")||[]);
 
 //热门搜索词
 const recommendList = ref(["美女","帅哥","宠物","卡通"]);
@@ -85,7 +87,10 @@ const classList = ref([
 
 //点击搜索
 const onSearch = ()=>{
-	
+	historySearch.value = [...new Set([queryParams.value.keyword, ...historySearch.value])]
+	uni.setStorageSync("historySearch", historySearch.value)
+	searchData();
+	console.log(queryParams.value.keyword);
 }
 
 //点击清除按钮
@@ -97,7 +102,8 @@ const onClear = ()=>{
 
 //点击标签进行搜索
 const clickTab = (value)=>{
-	
+	queryParams.value.keyword = value;
+	searchData()
 }
 
 
@@ -107,15 +113,25 @@ const removeHistory = ()=>{
 		title:"是否清空历史搜索？",
 		success:res=>{
 			if(res.confirm){
-				console.log("确认删除");			
+				uni.removeStorageSync("historySearch");	
+				historySearch.value = [];
 			}
 		}
 	})
 }
 
+const searchData = async ()=> {
+	let res = await apiSearchData(queryParams.value);
+	classList.value = [...classList.value,...res.data];
+	if(queryParams.value.pageSize>res.data.length) noData.value = true;
+	if(res.data.length == 0 && classList.value == 0) noSearch.value = true;
+	console.log(res);
+}
+
+
 //触底加载更多
 onReachBottom(()=>{
-	
+	queryParams.value.pageNum++
 })
 
 //关闭有页面
