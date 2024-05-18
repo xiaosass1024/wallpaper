@@ -4,28 +4,52 @@
 			<view class="tag">
 				<uni-tag text="置顶" inverted type="error" />
 			</view>
-			<view class="font">这个区域填写标题</view>
+			<view class="font">{{detail.title}}</view>
 		</view>
 		
 		<view class="info">
-			<view class="item">咸虾米</view>
+			<view class="item">{{detail.author}}</view>
 			<view class="item">
-				<uni-dateformat :date="Date.now()" format="yyyy/MM/dd hh:mm:ss"></uni-dateformat>
+				<uni-dateformat :date="detail.publish_date" format="yyyy/MM/dd hh:mm:ss"></uni-dateformat>
 			</view>
 		</view>
 		
 		<view class="content">
-			内容区域
+			<mp-html :content="detail.content" />
 		</view>
 		
 		<view class="count">
-			阅读 5588
+			阅读 {{detail.view_count}}
 		</view>
 		
 	</view>
 </template>
 
 <script setup>
+import { apiGetNoticeInfo } from '../../api/apis';
+import { ref } from 'vue';
+import {onLoad} from "@dcloudio/uni-app"
+
+
+const detail = ref(null)
+let noticeId;
+onLoad((e)=>{
+	console.log(e);
+	noticeId = e.id;
+	getNoticeDetail()
+})
+
+const getNoticeDetail = ()=>{
+	apiGetNoticeInfo({id:noticeId}).then(res=>{
+		detail.value = res.data;
+		// console.log(res);
+	})
+}	
+
+
+	
+	
+	
 	
 </script>
 

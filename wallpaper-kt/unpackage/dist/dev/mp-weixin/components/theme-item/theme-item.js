@@ -50,5 +50,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-f4eafbca"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/components/theme-item/theme-item.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-f4eafbca"], ["__file", "/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/components/theme-item/theme-item.vue"]]);
 wx.createComponent(Component);

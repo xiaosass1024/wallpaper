@@ -74,5 +74,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-bd381383"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/classlist/classlist.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-bd381383"], ["__file", "/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/classlist/classlist.vue"]]);
 wx.createPage(MiniProgramPage);

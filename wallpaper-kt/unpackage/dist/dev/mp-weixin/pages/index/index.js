@@ -34,6 +34,7 @@ const _sfc_main = {
     };
     const getNotice = async () => {
       let res = await api_apis.aipGetNotice({ select: true });
+      console.log(res);
       noticeList.value = res.data;
     };
     const getClassify = async () => {
@@ -41,7 +42,6 @@ const _sfc_main = {
         select: true
       });
       classifyList.value = res.data;
-      console.log(res);
     };
     const goPreview = (id) => {
       common_vendor.index.navigateTo({
@@ -70,7 +70,8 @@ const _sfc_main = {
         d: common_vendor.f(noticeList.value, (item, k0, i0) => {
           return {
             a: common_vendor.t(item.title),
-            b: item._id
+            b: "/pages/notice/detail?id=" + item._id,
+            c: item._id
           };
         }),
         e: common_vendor.p({
@@ -109,5 +110,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "C:/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "/Users/xiaosass/Desktop/wallpaper/wallpaper-kt/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

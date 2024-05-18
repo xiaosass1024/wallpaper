@@ -80,3 +80,11 @@ export function apiGetHistoryList(data={}){
 		data
 		})
 }
+
+
+export function apiGetNoticeInfo(data={}){
+	return request({
+		url:"/wallNewsDetail",
+		data
+		})
+}

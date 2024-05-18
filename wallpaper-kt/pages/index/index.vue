@@ -16,7 +16,7 @@
 			<view class="center">
 				<swiper vertical autoplay interval="1500" duration="1000" circular>
 					<swiper-item v-for="item in noticeList" :key="item._id">
-						<navigator url="/pages/notice/detail">
+						<navigator :url="'/pages/notice/detail?id='+item._id">
 						{{item.title}}
 						</navigator>
 					</swiper-item>
@@ -95,7 +95,7 @@ import {apiGetBanner, apiGetDayRandom, aipGetNotice,apiGetClassify} from "@/api/
 	//获取notice列表
 	const getNotice = async ()=>{
 		let res = await	aipGetNotice({select:true})
-		// console.log(res);
+		console.log(res);
 		noticeList.value = res.data		
 	}
 	
@@ -104,7 +104,7 @@ import {apiGetBanner, apiGetDayRandom, aipGetNotice,apiGetClassify} from "@/api/
 			select:true
 		});
 		classifyList.value = res.data
-		console.log(res);
+		// console.log(res);
 	}
 	
 	
